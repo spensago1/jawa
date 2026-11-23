@@ -153,7 +153,7 @@
                 <!-- Foto Guru Aktual dengan nuansa Jawa/Batik -->
                 <div class="w-48 h-48 md:w-56 md:h-56 relative flex-shrink-0 group">
                     <div class="absolute inset-0 bg-emas rounded-full transform translate-x-3 translate-y-3 transition group-hover:translate-x-4 group-hover:translate-y-4"></div>
-                    <img src="https://6af31553926b60443dfa2efa.imgix.net/sandbox/retno.png" alt="Retno Setyo Purwati" class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl z-10 sepia-[25%] group-hover:sepia-0 transition duration-500">
+                    <img src="https://6af31553926b60443dfa2efa.imgix.net/sandbox/retno.png" onerror="this.src='https://placehold.co/400x400/704214/FDFBF7?text=Bu+Retno'" alt="Retno Setyo Purwati" class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl z-10 sepia-[25%] group-hover:sepia-0 transition duration-500">
                 </div>
                 
                 <div class="text-center md:text-left">
@@ -175,7 +175,7 @@
         </div>
     </section>
 
-    <!-- 3. Administrasi Pembelajaran (Nuansa Warna Klasik Jawa Diubah) -->
+    <!-- 3. Administrasi Pembelajaran (Nuansa Warna Klasik Jawa) -->
     <section id="administrasi" class="py-20 bg-bglight border-b border-emas/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -543,42 +543,123 @@
         </div>
     </section>
 
-    <!-- 7. Dokumentasi (Galeri) -->
+    <!-- 7. Dokumentasi (Galeri Foto & Keterangan Jelas) -->
     <section id="dokumentasi" class="py-20 bg-soga border-t-4 border-emas">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-heading font-bold text-emas">Dokumentasi Kegiatan</h2>
                 <div class="h-1 w-24 bg-krem mx-auto mt-4 rounded opacity-50"></div>
-                <p class="mt-4 text-krem font-light max-w-2xl mx-auto">Potret keseruan dan semangat siswa-siswi dalam mempelajari Bahasa dan Budaya Jawa.</p>
+                <p class="mt-4 text-krem font-light max-w-2xl mx-auto">Potret keseruan dan semangat siswa-siswi SMPN 1 Tlogomulyo dalam mempelajari serta melestarikan Bahasa dan Budaya Jawa.</p>
             </div>
 
-            <!-- Grid Galeri -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+            <!-- Grid Kartu Foto + Keterangan -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="gallery-grid">
                 <script>
                     const galleryData = [
-                        "Praktik Sesorah di Kelas",
-                        "Diskusi Kelompok Aksara Jawa",
-                        "Pementasan Sandiwara",
-                        "Nembang Macapat",
-                        "Kunjungan Budaya Lokal",
-                        "Lomba Menulis Aksara",
-                        "Praktik Unggah-ungguh Basa",
-                        "Mengenal Wayang Kulit",
-                        "Belajar Gamelan Dasar",
-                        "Ujian Praktik Basa Jawa"
+                        {
+                            title: "Praktik Sesorah di Kelas",
+                            desc: "Siswa kelas IX berlatih menyampaikan pidato bahasa Jawa (sesorah) dengan tata krama dan intonasi yang santun.",
+                            category: "Kelas IX",
+                            img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Diskusi Kelompok Aksara Jawa",
+                            desc: "Kerja sama siswa memecahkan soal alih aksara carakan, sandhangan, dan pasangan secara interaktif.",
+                            category: "Kelas VII",
+                            img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Pementasan Sandiwara Jawa",
+                            desc: "Ekspresi seni peran siswa dalam membawakan lakon drama tradisional bertema budi pekerti luhur.",
+                            category: "Kelas IX",
+                            img: "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Nembang Macapat Bersama",
+                            desc: "Pelatihan olah vokal dan pemahaman paugeran tembang Pocung, Kinanthi, serta Pangkur di ruang kelas.",
+                            category: "Kelas VIII",
+                            img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Kunjungan Budaya Lokal",
+                            desc: "Observasi langsung tradisi dan warisan budaya setempat untuk menumbuhkan rasa cinta kearifan lokal.",
+                            category: "Kegiatan Luar",
+                            img: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Lomba Menulis Aksara Jawa",
+                            desc: "Kompetisi kaligrafi aksara Jawa antar kelas dalam rangka memperingati Bulan Bahasa dan Sastra.",
+                            category: "Lomba Sekolah",
+                            img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Praktik Unggah-ungguh Basa",
+                            desc: "Simulasi percakapan sehari-hari (pacelathon) menerapkan ragam basa ngoko lan krama alus.",
+                            category: "Kelas VII",
+                            img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Mengenal Tokoh Wayang Kulit",
+                            desc: "Apresiasi seni pewayangan untuk meneladani watak kesatria dalam epos Ramayana dan Mahabharata.",
+                            category: "Kelas VIII & IX",
+                            img: "https://images.unsplash.com/photo-1583265627959-fb7042f5133b?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Belajar Karawitan & Gamelan",
+                            desc: "Pengenalan instrumen gamelan Jawa sebagai bagian dari pelestarian seni musik tradisional.",
+                            category: "Ekstrakurikuler",
+                            img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=800&q=80"
+                        },
+                        {
+                            title: "Ujian Praktik Basa Jawa",
+                            desc: "Penilaian akhir keterampilan berbahasa, berbusana adat Jawa, dan kesantunan siswa kelas IX.",
+                            category: "Evaluasi",
+                            img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80"
+                        }
                     ];
 
-                    galleryData.forEach((caption, idx) => {
-                        const imgUrl = `https://6af31553926b60443dfa2efa.imgix.net/sandbox/tawar.png7?text=Kegiatan+${idx+1}`;
-                        const fullImgUrl = `https://6af31553926b60443dfa2efa.imgix.net/sandbox/tawar.png?text=Kegiatan+${idx+1}`;
+                    galleryData.forEach((item, idx) => {
+                        const fallbackImg = `https://placehold.co/800x600/704214/FDFBF7?text=Dokumentasi+${idx + 1}`;
+                        const safeTitle = item.title.replace(/'/g, "\\'");
+                        const safeDesc = item.desc.replace(/'/g, "\\'");
                         
                         document.write(`
-                            <div class="relative group overflow-hidden rounded-xl cursor-pointer aspect-[4/3] bg-cokelat border border-emas/30 shadow" onclick="openLightbox('${fullImgUrl}', '${caption}')">
-                                <img src="${imgUrl}" alt="${caption}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100">
-                                <div class="absolute inset-0 bg-gradient-to-t from-soga/95 via-soga/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                                    <p class="text-krem text-sm font-semibold p-4 text-center w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${caption}</p>
+                            <article class="bg-krem rounded-2xl overflow-hidden shadow-lg border-2 border-emas/40 flex flex-col group hover:-translate-y-1.5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                                     onclick="openLightbox('${item.img}', '${safeTitle}', '${safeDesc}', '${fallbackImg}')">
+                                <!-- Container Foto -->
+                                <div class="relative aspect-[4/3] overflow-hidden bg-cokelat">
+                                    <img src="${item.img}" 
+                                         onerror="this.onerror=null; this.src='${fallbackImg}';" 
+                                         alt="${item.title}" 
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                    <!-- Badge Kategori -->
+                                    <span class="absolute top-3 left-3 bg-soga/90 text-emas text-xs font-bold px-3 py-1 rounded-full border border-emas/40 shadow">
+                                        ${item.category}
+                                    </span>
+                                    <!-- Ikon Perbesar -->
+                                    <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-emas text-soga flex items-center justify-center shadow-md opacity-90 group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-expand-alt text-xs"></i>
+                                    </div>
                                 </div>
-                            </div>
+                                
+                                <!-- Keterangan Foto (Selalu Terlihat) -->
+                                <div class="p-5 flex-grow flex flex-col justify-between bg-krem">
+                                    <div>
+                                        <h3 class="font-heading font-bold text-base md:text-lg text-soga group-hover:text-cokelat transition-colors mb-2 leading-snug">
+                                            ${item.title}
+                                        </h3>
+                                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                                            ${item.desc}
+                                        </p>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-emas/20 flex items-center justify-between text-xs font-semibold text-cokelat">
+                                        <span>Dokumentasi #${idx + 1}</span>
+                                        <span class="group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                                            Lihat Foto <i class="fas fa-arrow-right text-[10px]"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
                         `);
                     });
                 </script>
@@ -588,11 +669,16 @@
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 hidden flex flex-col items-center justify-center p-4 lightbox-anim opacity-0 scale-95">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-emas text-4xl focus:outline-none transition">
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 md:top-8 md:right-8 w-11 h-11 rounded-full bg-soga text-emas hover:bg-emas hover:text-soga border border-emas/50 flex items-center justify-center text-2xl focus:outline-none transition shadow-lg">
             &times;
         </button>
-        <img id="lightbox-img" src="" alt="Gallery Image Full" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl border-4 border-soga">
-        <p id="lightbox-caption" class="text-emas font-heading text-xl md:text-2xl mt-6 text-center"></p>
+        <div class="max-w-4xl w-full flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Gallery Image Full" class="max-w-full max-h-[65vh] object-contain rounded-xl shadow-2xl border-4 border-emas/70 bg-soga">
+            <div class="mt-5 text-center max-w-2xl bg-soga/90 px-6 py-4 rounded-2xl border border-emas/40 shadow-xl">
+                <h4 id="lightbox-caption" class="text-emas font-heading font-bold text-lg md:text-2xl mb-1.5"></h4>
+                <p id="lightbox-desc" class="text-krem text-sm md:text-base leading-relaxed opacity-90"></p>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -668,14 +754,22 @@
             evt.currentTarget.classList.add('bg-white', 'text-soga', 'border-emas');
         }
 
-        // 5. Lightbox Logic
+        // 5. Lightbox Logic (dengan judul & deskripsi lengkap)
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxDesc = document.getElementById('lightbox-desc');
         
-        function openLightbox(src, caption) {
+        function openLightbox(src, caption, desc = '', fallbackSrc = '') {
+            lightboxImg.onerror = function() {
+                if (fallbackSrc) {
+                    this.onerror = null;
+                    this.src = fallbackSrc;
+                }
+            };
             lightboxImg.src = src;
             lightboxCaption.textContent = caption;
+            lightboxDesc.textContent = desc;
             
             lightbox.classList.remove('hidden');
             setTimeout(() => {
