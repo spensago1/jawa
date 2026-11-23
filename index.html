@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS B. Jawa - SMPN 1 Tlogomulyo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        soga: '#3B2716',     // Cokelat tua soga klasik
+                        cokelat: '#704214',  // Cokelat kayu klasik
+                        emas: '#C5A059',     // Emas keraton nuansa jawa
+                        krem: '#FDFBF7',     // Krem kertas lontar / klasik
+                        bglight: '#F4EFEA'   // Latar belakang klasik bernuansa jawa
+                    },
+                    fontFamily: {
+                        heading: ['Merriweather', 'serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4EFEA;
+            color: #2D241E;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Merriweather', serif;
+        }
+        
+        /* Pattern Batik Klasik Jawa */
+        .batik-pattern {
+            background-color: #3B2716;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2.5L22.5 11l2.5 2.5V16h15v2H25v2.5L22.5 23l-2.5-2.5zm-10-10L7.5 8 5 10.5V8H0V6h5V3.5L7.5 1 10 3.5V6h10V8H10v2.5zm20 20l-2.5-2.5-2.5 2.5V28h-10v2h10v2.5l2.5 2.5 2.5-2.5V30h5v-2h-5v-2.5z' fill='%23C5A059' fill-opacity='0.12' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .lightbox-anim {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #704214;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Header & Navigasi Utama -->
+    <header class="fixed w-full z-50 transition-all duration-300 shadow-lg bg-soga text-white border-b-2 border-emas" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-12 h-12 bg-emas rounded-full flex items-center justify-center text-soga font-bold font-heading text-2xl shadow-inner border border-white/20">
+                        ꦗ
+                    </div>
+                    <div>
+                        <h1 class="font-heading font-bold text-lg leading-tight hidden sm:block text-emas">LMS B. Jawa</h1>
+                        <p class="text-xs text-krem hidden sm:block">SMPN 1 Tlogomulyo</p>
+                    </div>
+                </div>
+
+                <!-- Navigasi Desktop -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#beranda" class="hover:text-emas font-medium transition duration-200">Beranda</a>
+                    <a href="#profil" class="hover:text-emas font-medium transition duration-200">Profil Guru</a>
+                    <a href="#administrasi" class="hover:text-emas font-medium transition duration-200">Administrasi</a>
+                    
+                    <!-- Dropdown Materi -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 font-medium hover:text-emas transition duration-200 focus:outline-none py-2">
+                            Materi <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        </button>
+                        <div class="absolute left-0 mt-0 w-48 bg-krem rounded-b-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top border-t-4 border-emas text-soga">
+                            <a href="#materi-vii" class="block px-5 py-3 hover:bg-bglight hover:text-cokelat font-medium border-b border-gray-200">Kelas VII</a>
+                            <a href="#materi-viii" class="block px-5 py-3 hover:bg-bglight hover:text-cokelat font-medium border-b border-gray-200">Kelas VIII</a>
+                            <a href="#materi-ix" class="block px-5 py-3 hover:bg-bglight hover:text-cokelat font-medium rounded-b-md">Kelas IX</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#dokumentasi" class="hover:text-emas font-medium transition duration-200">Dokumentasi</a>
+                </nav>
+
+                <!-- Tombol Menu Mobile -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-emas hover:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigasi Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-soga border-t border-emas/30 shadow-inner">
+            <a href="#beranda" class="block px-6 py-3 border-b border-cokelat/40 text-krem hover:bg-cokelat">Beranda</a>
+            <a href="#profil" class="block px-6 py-3 border-b border-cokelat/40 text-krem hover:bg-cokelat">Profil Guru</a>
+            <a href="#administrasi" class="block px-6 py-3 border-b border-cokelat/40 text-krem hover:bg-cokelat">Administrasi</a>
+            <div class="px-6 py-3 border-b border-cokelat/40 text-emas font-bold bg-cokelat/60">Materi Pembelajaran</div>
+            <a href="#materi-vii" class="block px-10 py-3 text-krem hover:bg-cokelat border-b border-cokelat/30 text-sm">Kelas VII</a>
+            <a href="#materi-viii" class="block px-10 py-3 text-krem hover:bg-cokelat border-b border-cokelat/30 text-sm">Kelas VIII</a>
+            <a href="#materi-ix" class="block px-10 py-3 text-krem hover:bg-cokelat border-b border-cokelat/30 text-sm">Kelas IX</a>
+            <a href="#dokumentasi" class="block px-6 py-3 text-krem hover:bg-cokelat">Dokumentasi</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="pt-28 pb-20 md:pt-40 md:pb-32 batik-pattern text-white relative flex-grow flex items-center border-b-4 border-emas">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-4 rounded-full bg-emas text-soga text-sm font-bold tracking-wider mb-6 shadow">SMP NEGERI 1 TLOGOMULYO</span>
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6 drop-shadow-lg leading-tight text-krem">
+                Sinau Basa Jawa <br/> <span class="text-emas">Kanthi Seneng & Gampang</span>
+            </h1>
+            <p class="text-lg md:text-xl font-light text-krem mb-10 max-w-2xl mx-auto opacity-90">
+                Sistem Pembelajaran Daring (LMS) interaktif untuk melestarikan budaya dan bahasa Jawa luhur bagi generasi penerus.
+            </p>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="#materi-vii" class="bg-emas text-soga font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition duration-300 transform hover:-translate-y-1">Mulai Belajar</a>
+                <a href="#profil" class="bg-transparent border-2 border-emas text-krem font-bold py-3 px-8 rounded-full hover:bg-emas hover:text-soga transition duration-300">Profil Guru</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Profil Guru -->
+    <section id="profil" class="py-20 bg-krem border-b border-emas/20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-heading font-bold text-soga">Profil Pendidik</h2>
+                <div class="h-1 w-24 bg-emas mx-auto mt-4 rounded"></div>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border-2 border-emas/30 flex flex-col md:flex-row items-center gap-10">
+                <!-- Foto Guru Aktual dengan nuansa Jawa/Batik -->
+                <div class="w-48 h-48 md:w-56 md:h-56 relative flex-shrink-0 group">
+                    <div class="absolute inset-0 bg-emas rounded-full transform translate-x-3 translate-y-3 transition group-hover:translate-x-4 group-hover:translate-y-4"></div>
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=500" alt="Retno Setyo Purwati" class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl z-10 sepia-[25%] group-hover:sepia-0 transition duration-500">
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center space-x-2 bg-bglight px-4 py-1.5 rounded-full shadow-sm mb-4 border border-emas/30">
+                        <i class="fas fa-chalkboard-teacher text-cokelat text-sm"></i>
+                        <span class="text-sm font-semibold text-soga tracking-wide">Guru Mata Pelajaran Bahasa Jawa</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-soga mb-2">Retno Setyo Purwati, <span class="text-xl md:text-2xl text-cokelat">S.Pd., M.Si.</span></h3>
+                    <p class="text-xs text-emas font-semibold tracking-wider uppercase mb-4">NIP. 198205122008012015</p>
+                    <p class="text-gray-700 leading-relaxed text-base md:text-lg mb-6">
+                        Berdedikasi tinggi untuk merawat dan mengajarkan nilai-nilai luhur budaya, unggah-ungguh, etika, serta sastra Jawa kepada siswa-siswi SMP Negeri 1 Tlogomulyo. Membawa semangat pembelajaran yang interaktif, modern, namun tetap berpijak teguh pada akar budaya tradisi Nusantara.
+                    </p>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <span class="w-10 h-10 rounded-full bg-bglight text-cokelat flex items-center justify-center shadow hover:bg-emas hover:text-white transition cursor-pointer border border-emas/30"><i class="fas fa-envelope"></i></span>
+                        <span class="w-10 h-10 rounded-full bg-bglight text-cokelat flex items-center justify-center shadow hover:bg-emas hover:text-white transition cursor-pointer border border-emas/30"><i class="fab fa-whatsapp"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Administrasi Pembelajaran (Nuansa Warna Klasik Jawa Diubah) -->
+    <section id="administrasi" class="py-20 bg-bglight border-b border-emas/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-soga">Administrasi Pembelajaran</h2>
+                <div class="h-1 w-24 bg-emas mx-auto mt-4 rounded"></div>
+                <p class="mt-4 text-gray-700 max-w-2xl mx-auto">Akses cepat terpadu ke berbagai dokumen perencanaan dan perangkat pembelajaran guru.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+                <script>
+                    const adminLinks = [
+                        { name: "Kaldik", icon: "fa-calendar-alt", bg: "bg-amber-100", border: "border-amber-300" },
+                        { name: "Rincian Waktu", icon: "fa-clock", bg: "bg-yellow-100", border: "border-yellow-300" },
+                        { name: "ATP", icon: "fa-route", bg: "bg-orange-100", border: "border-orange-300" },
+                        { name: "KKTP", icon: "fa-check-double", bg: "bg-stone-200", border: "border-stone-400" },
+                        { name: "Prota", icon: "fa-book", bg: "bg-amber-200", border: "border-amber-400" },
+                        { name: "Promes", icon: "fa-calendar-week", bg: "bg-yellow-200", border: "border-yellow-400" },
+                        { name: "Modul Ajar", icon: "fa-file-signature", bg: "bg-orange-200", border: "border-orange-400" },
+                        { name: "LKPD", icon: "fa-clipboard-list", bg: "bg-stone-300", border: "border-stone-500" },
+                        { name: "Lampiran", icon: "fa-paperclip", bg: "bg-amber-100", border: "border-amber-300" }
+                    ];
+
+                    adminLinks.forEach((link, index) => {
+                        const colClass = (index === 8) ? 'col-span-2 md:col-span-1 lg:col-span-1' : '';
+                        document.write(`
+                            <a href="https://sites.google.com/view/kkaspensago" target="_blank" rel="noopener noreferrer" 
+                               class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 text-center group border-2 ${link.border} flex flex-col items-center justify-center h-full ${colClass}">
+                                <div class="w-14 h-14 rounded-full ${link.bg} flex items-center justify-center mb-4 group-hover:bg-soga group-hover:text-emas transition duration-300 shadow-inner">
+                                    <i class="fas ${link.icon} text-2xl text-cokelat group-hover:text-emas transition"></i>
+                                </div>
+                                <h4 class="font-bold text-soga group-hover:text-cokelat transition">${link.name}</h4>
+                            </a>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Materi Kelas VII -->
+    <section id="materi-vii" class="py-20 bg-krem border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-5 mb-8">
+                <div class="w-16 h-16 bg-soga text-emas flex items-center justify-center rounded-2xl shadow-lg border border-emas/40">
+                    <span class="text-3xl font-bold font-heading">VII</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-soga">Materi Kelas VII</h2>
+                    <a href="https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smpmts-kelas-vii-edisi-revisi" target="_blank" class="text-sm text-cokelat hover:text-emas flex items-center gap-1 mt-1 transition">
+                        <i class="fas fa-external-link-alt text-xs"></i> Referensi Buku Kemendikdasmen
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Accordion Item 1 -->
+                <div class="border-2 border-emas/30 rounded-xl overflow-hidden shadow-sm bg-white">
+                    <button class="accordion-btn w-full px-6 py-5 flex justify-between items-center bg-bglight hover:bg-amber-50 transition text-left" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-soga">Bab 1: Unggah-ungguh Basa & Tata Krama</span>
+                        <div class="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0 ml-4 border border-emas/20">
+                            <i class="fas fa-chevron-down text-cokelat transition-transform duration-300 icon-arrow"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-5 bg-white border-t border-gray-100">
+                        <ul class="space-y-3 text-gray-700 mb-6">
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Ragam Ngoko:</strong> Digunakan kepada teman sebaya, orang yang lebih muda, atau situasi akrab (ngoko lugu dan ngoko alus).</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Ragam Krama:</strong> Digunakan kepada orang yang lebih tua, dihormati, atau baru dikenal (krama lugu dan krama alus/krama inggil).</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Praktik Komunikasi:</strong> Dialog sapa aruh, meminta/memberi informasi lokasi, serta menyampaikan simpati atau tanggapan santun.</span></li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 flex justify-end">
+                            <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-sm font-bold py-2.5 px-5 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                <i class="fas fa-book-open"></i> Materi Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="border-2 border-emas/30 rounded-xl overflow-hidden shadow-sm bg-white">
+                    <button class="accordion-btn w-full px-6 py-5 flex justify-between items-center bg-bglight hover:bg-amber-50 transition text-left" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-soga">Bab 2: Tata Bahasa & Kosakata (Kawruh Basa)</span>
+                        <div class="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0 ml-4 border border-emas/20">
+                            <i class="fas fa-chevron-down text-cokelat transition-transform duration-300 icon-arrow"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-5 bg-white border-t border-gray-100">
+                        <ul class="space-y-3 text-gray-700 mb-6">
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Jenis Tembung:</strong> Tembung lingga (kata dasar) dan tembung andhahan (kata berimbuhan).</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Jenis Ukara & Unsur Kalimat:</strong> Kalimat aktif/pasif serta struktur unsur kalimat.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Ungkapan Tradisional:</strong> Paribasan, bebasan, saloka, atau parikan sesuai alur tujuan pembelajaran sekolah.</span></li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 flex justify-end">
+                            <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-sm font-bold py-2.5 px-5 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                <i class="fas fa-book-open"></i> Materi Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="border-2 border-emas/30 rounded-xl overflow-hidden shadow-sm bg-white">
+                    <button class="accordion-btn w-full px-6 py-5 flex justify-between items-center bg-bglight hover:bg-amber-50 transition text-left" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-soga">Bab 3: Teks Sastra & Budaya Jawa</span>
+                        <div class="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0 ml-4 border border-emas/20">
+                            <i class="fas fa-chevron-down text-cokelat transition-transform duration-300 icon-arrow"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-5 bg-white border-t border-gray-100">
+                        <ul class="space-y-3 text-gray-700 mb-6">
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Teks Deskripsi Peristiwa Budaya:</strong> Mengidentifikasi ciri, informasi pokok, dan menuliskan deskripsi budaya daerah.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Cerita Rakyat & Wayang:</strong> Memahami alur, penokohan, pesan moral, dan menceritakan kembali isi cerita.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Tembang Macapat:</strong> Memahami pathokan (guru gatra, guru wilangan, guru lagu) dan makna pupuh seperti Pocung atau Sinom.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Lagu Dolanan / Geguritan:</strong> Menelaah pesan dan nilai budaya dalam karya sastra sederhana.</span></li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 flex justify-end">
+                            <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-sm font-bold py-2.5 px-5 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                <i class="fas fa-book-open"></i> Materi Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="border-2 border-emas/30 rounded-xl overflow-hidden shadow-sm bg-white">
+                    <button class="accordion-btn w-full px-6 py-5 flex justify-between items-center bg-bglight hover:bg-amber-50 transition text-left" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-soga">Bab 4: Aksara Jawa</span>
+                        <div class="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0 ml-4 border border-emas/20">
+                            <i class="fas fa-chevron-down text-cokelat transition-transform duration-300 icon-arrow"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-5 bg-white border-t border-gray-100">
+                        <ul class="space-y-3 text-gray-700 mb-6">
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Aksara Legena (Carakan):</strong> Membaca dan menulis 20 huruf dasar aksara Jawa (ha-na-ca-ra-ka hingga mba-ga-nga).</span></li>
+                            <li class="flex gap-3"><i class="fas fa-check text-emas mt-1"></i><span><strong>Sandhangan & Pasangan:</strong> Mengenal sandhangan swara, panyigeg wanda, dan wyancana serta penggunaan pasangan.</span></li>
+                        </ul>
+                        <div class="pt-3 border-t border-gray-100 flex justify-end">
+                            <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-sm font-bold py-2.5 px-5 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                <i class="fas fa-book-open"></i> Materi Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Materi Kelas VIII -->
+    <section id="materi-viii" class="py-20 bg-bglight border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-5 mb-8">
+                <div class="w-16 h-16 bg-soga text-emas flex items-center justify-center rounded-2xl shadow-lg border border-emas/40">
+                    <span class="text-3xl font-bold font-heading">VIII</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-soga">Materi Kelas VIII</h2>
+                    <a href="https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_VIII_Rev.pdf" target="_blank" class="text-sm text-cokelat hover:text-emas flex items-center gap-1 mt-1 transition">
+                        <i class="fas fa-external-link-alt text-xs"></i> Referensi Dokumen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tab Container -->
+            <div class="bg-white rounded-2xl shadow-md border-2 border-emas/30 overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex border-b border-gray-200 bg-bglight">
+                    <button class="tab-btn flex-1 py-4 px-6 text-center font-bold text-soga bg-white border-t-4 border-emas focus:outline-none transition-all" onclick="switchTab(event, 'semester1')">
+                        Semester 1
+                    </button>
+                    <button class="tab-btn flex-1 py-4 px-6 text-center font-bold text-gray-500 border-t-4 border-transparent hover:bg-krem focus:outline-none transition-all" onclick="switchTab(event, 'semester2')">
+                        Semester 2
+                    </button>
+                </div>
+                
+                <!-- Tab Content: Semester 1 -->
+                <div id="semester1" class="tab-content p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-cokelat mb-5 border-l-4 border-emas pl-3">Ringkasan Materi Semester 1</h3>
+                    <ul class="space-y-6 text-gray-700">
+                        <!-- Submenu 1 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-book-reader text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Teks Naratif / Crita Legenda:</strong> Memahami cerita asal-usul tempat atau fenomena alam, ciri-ciri (anonim, kolektif, statis, magis, ada amanat), unsur intrinsik, dan isi cerita.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 2 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-music text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Tembang Macapat (Serat Wulangreh):</strong> Mengenal paugeran (guru gatra, guru wilangan, guru lagu) dan makna piwulang luhur, seperti pupuh Pangkur atau Kinanthi.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 3 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-newspaper text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Teks Pawarta:</strong> Memahami pengertian, jenis, ciri berita, unsur 5W+1H, serta cara menyusun pawarta.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 4 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-comments text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Teks Pacelathon & Unggah-Ungguh Basa:</strong> Berlatih dialog sesuai konteks dan menerapkan tingkat tutur (ngoko dan krama).</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 5 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-pen-fancy text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Paramasastra & Aksara Jawa:</strong> Mengenal jenis tembung/ukara serta membaca dan menulis wacana beraksara Jawa.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tab Content: Semester 2 -->
+                <div id="semester2" class="tab-content p-6 md:p-8 hidden">
+                    <h3 class="text-xl font-bold text-cokelat mb-5 border-l-4 border-emas pl-3">Ringkasan Materi Semester 2</h3>
+                    <ul class="space-y-6 text-gray-700">
+                        <!-- Submenu 1 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-mask text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Cerita Wayang / Kasusastran:</strong> Memahami lakon atau tokoh pewayangan (misalnya kisah Resi Jatayu dalam epos Ramayana) serta nilai moral di dalamnya.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 2 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-drum text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Tembang Macapat Lanjutan:</strong> Mempelajari pupuh lain (seperti Kinanthi atau Mijil), menafsirkan isi, dan berlatih menembangkan.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 3 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-landmark text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Crita Rakyat & Lelewane Basa:</strong> Menelaah cerita rakyat setempat serta ungkapan/gaya bahasa Jawa (pepindhan, paribasan, bebasan, dll).</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Submenu 4 -->
+                        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-bglight rounded-xl border border-gray-200 transition">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded bg-krem flex items-center justify-center flex-shrink-0 border border-emas/30"><i class="fas fa-language text-cokelat"></i></div>
+                                <div><strong class="text-soga block mb-1">Alih Aksara & Unggah-Ungguh:</strong> Mengalihaksarakan teks aksara Jawa ke huruf Latin (dan sebaliknya) serta menerapkan unggah-ungguh.</div>
+                            </div>
+                            <div class="flex-shrink-0 text-right">
+                                <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-xs font-bold py-2 px-4 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                    <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Materi Kelas IX -->
+    <section id="materi-ix" class="py-20 bg-krem border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-5 mb-8">
+                <div class="w-16 h-16 bg-soga text-emas flex items-center justify-center rounded-2xl shadow-lg border border-emas/40">
+                    <span class="text-3xl font-bold font-heading">IX</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-soga">Materi Kelas IX</h2>
+                    <a href="https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_IX_Rev.pdf" target="_blank" class="text-sm text-cokelat hover:text-emas flex items-center gap-1 mt-1 transition">
+                        <i class="fas fa-external-link-alt text-xs"></i> Referensi Dokumen
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <script>
+                    const kelas9Data = [
+                        { title: "A. Cerita Wayang (Epos Ramayana)", 
+                          items: ["<strong>Fokus:</strong> Memahami tokoh, alur, konflik, dan nilai budi pekerti (kepahlawanan, kesetiaan) pada lakon Ramayana (misal: Anoman Duta).", "<strong>Keterampilan:</strong> Menganalisis isi cerita, menjawab pertanyaan teks, dan mengaitkan nilai moral dengan kehidupan."] },
+                        { title: "B. Serat Piwulang & Tembang Macapat", 
+                          items: ["<strong>Fokus:</strong> Menelaah ajaran moral dari karya sastra klasik Serat Wulangreh.", "<strong>Aturan (Paugeran):</strong> Guru gatra, guru wilangan, guru lagu, serta watak tembang.", "<strong>Keterampilan:</strong> Mengartikan makna tembang, menemukan amanat, dan alih aksara."] },
+                        { title: "C. Sesorah (Pidato) / Pewara", 
+                          items: ["<strong>Fokus:</strong> Menyampaikan sambutan, informasi, atau ajakan secara santun.", "<strong>Struktur:</strong> Pambuka (salam, sapaan), Isi (pesan), dan Penutupan (kesimpulan, salam).", "<strong>Keterampilan:</strong> Menyusun naskah dan mempraktikkan penyampaian dengan unggah-ungguh basa."] },
+                        { title: "D. Sandiwara / Drama Tradisional", 
+                          items: ["<strong>Fokus:</strong> Mengenal drama budaya Jawa seperti kethoprak/sandiwara.", "<strong>Unsur:</strong> Tokoh, watak, latar, alur, amanat.", "<strong>Keterampilan:</strong> Menulis naskah sederhana dan memerankan tokoh (maragakake)."] },
+                        { title: "E. Teks Nonfiksi / Budaya Lokal", 
+                          items: ["<strong>Fokus:</strong> Memahami informasi faktual tradisi/upacara adat Jawa, laporan observasi, atau biografi tokoh.", "<strong>Keterampilan:</strong> Mengidentifikasi pokok informasi dan menulis ringkasan deskriptif."] },
+                        { title: "F. Unggah-Ungguh Basa, Paramasastra & Basa Rinengga", 
+                          items: ["<strong>Unggah-Ungguh:</strong> Menyesuaikan ragam ngoko dan krama dengan lawan bicara.", "<strong>Paramasastra:</strong> Jenis kata, dasanama, dan struktur kalimat.", "<strong>Basa Rinengga:</strong> Ungkapan sastra (paribasan, purwakanthi, dll)."] },
+                        { title: "G. Aksara Jawa", 
+                          items: ["<strong>Fokus:</strong> Membaca dan menulis paragraf beraksara Jawa menggunakan carakan, sandhangan, pasangan, aksara rekan, dan angka Jawa."] }
+                    ];
+
+                    kelas9Data.forEach(item => {
+                        let listItems = item.items.map(li => `<li class="flex gap-3"><i class="fas fa-angle-right text-emas mt-1"></i><span>${li}</span></li>`).join('');
+                        document.write(`
+                            <div class="border-2 border-emas/30 rounded-xl overflow-hidden shadow-sm bg-white">
+                                <button class="accordion-btn w-full px-6 py-5 flex justify-between items-center bg-bglight hover:bg-amber-50 transition text-left" onclick="toggleAccordion(this)">
+                                    <span class="font-bold text-lg text-soga">${item.title}</span>
+                                    <div class="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center flex-shrink-0 ml-4 border border-emas/20">
+                                        <i class="fas fa-chevron-down text-cokelat transition-transform duration-300 icon-arrow"></i>
+                                    </div>
+                                </button>
+                                <div class="accordion-content hidden px-6 py-5 bg-white border-t border-gray-100">
+                                    <ul class="space-y-3 text-gray-700 mb-6">
+                                        ${listItems}
+                                    </ul>
+                                    <div class="pt-3 border-t border-gray-100 flex justify-end">
+                                        <a href="https://spensago.sch.id" target="_blank" class="inline-flex items-center gap-2 bg-soga text-emas text-sm font-bold py-2.5 px-5 rounded-lg shadow hover:bg-cokelat hover:text-white transition duration-200">
+                                            <i class="fas fa-book-open"></i> Materi Selengkapnya
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Dokumentasi (Galeri) -->
+    <section id="dokumentasi" class="py-20 bg-soga border-t-4 border-emas">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-heading font-bold text-emas">Dokumentasi Kegiatan</h2>
+                <div class="h-1 w-24 bg-krem mx-auto mt-4 rounded opacity-50"></div>
+                <p class="mt-4 text-krem font-light max-w-2xl mx-auto">Potret keseruan dan semangat siswa-siswi dalam mempelajari Bahasa dan Budaya Jawa.</p>
+            </div>
+
+            <!-- Grid Galeri -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+                <script>
+                    const galleryData = [
+                        "Praktik Sesorah di Kelas",
+                        "Diskusi Kelompok Aksara Jawa",
+                        "Pementasan Sandiwara",
+                        "Nembang Macapat",
+                        "Kunjungan Budaya Lokal",
+                        "Lomba Menulis Aksara",
+                        "Praktik Unggah-ungguh Basa",
+                        "Mengenal Wayang Kulit",
+                        "Belajar Gamelan Dasar",
+                        "Ujian Praktik Basa Jawa"
+                    ];
+
+                    galleryData.forEach((caption, idx) => {
+                        const imgUrl = `https://placehold.co/600x400/704214/FDFBF7?text=Kegiatan+${idx+1}`;
+                        const fullImgUrl = `https://placehold.co/1200x800/704214/FDFBF7?text=Kegiatan+${idx+1}`;
+                        
+                        document.write(`
+                            <div class="relative group overflow-hidden rounded-xl cursor-pointer aspect-[4/3] bg-cokelat border border-emas/30 shadow" onclick="openLightbox('${fullImgUrl}', '${caption}')">
+                                <img src="${imgUrl}" alt="${caption}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100">
+                                <div class="absolute inset-0 bg-gradient-to-t from-soga/95 via-soga/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                    <p class="text-krem text-sm font-semibold p-4 text-center w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${caption}</p>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 hidden flex flex-col items-center justify-center p-4 lightbox-anim opacity-0 scale-95">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-emas text-4xl focus:outline-none transition">
+            &times;
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery Image Full" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl border-4 border-soga">
+        <p id="lightbox-caption" class="text-emas font-heading text-xl md:text-2xl mt-6 text-center"></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-krem py-10 border-t-4 border-emas">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="w-12 h-12 bg-soga rounded-full mx-auto flex items-center justify-center mb-4 border border-emas/40">
+                <span class="text-emas font-bold font-heading text-xl">ꦗ</span>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white mb-2">LMS Bahasa Jawa</h3>
+            <p class="text-sm opacity-75 mb-6">SMP Negeri 1 Tlogomulyo</p>
+            <p class="text-xs opacity-50">&copy; 2026 Hak Cipta Dilindungi. Dikelola oleh Retno Setyo Purwati, S.Pd., M.Si.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Sticky Navbar Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-0', 'bg-opacity-95', 'backdrop-blur-sm');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-0', 'bg-opacity-95', 'backdrop-blur-sm');
+            }
+        });
+
+        // 3. Accordion Logic
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.icon-arrow');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                btn.classList.add('bg-amber-50');
+                btn.classList.remove('bg-bglight');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                btn.classList.remove('bg-amber-50');
+                btn.classList.add('bg-bglight');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // 4. Tabs Logic (Kelas VIII)
+        function switchTab(evt, tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-soga', 'border-emas');
+                btn.classList.add('text-gray-500', 'border-transparent');
+            });
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            evt.currentTarget.classList.remove('text-gray-500', 'border-transparent');
+            evt.currentTarget.classList.add('bg-white', 'text-soga', 'border-emas');
+        }
+
+        // 5. Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        
+        function openLightbox(src, caption) {
+            lightboxImg.src = src;
+            lightboxCaption.textContent = caption;
+            
+            lightbox.classList.remove('hidden');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0', 'scale-95');
+                lightbox.classList.add('opacity-100', 'scale-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100', 'scale-100');
+            lightbox.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
